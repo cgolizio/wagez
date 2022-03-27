@@ -1,7 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
 
-import { Field } from "../components/Field";
-
 export const customTheme = extendTheme({
   styles: {
     global: {
@@ -15,9 +13,7 @@ export const customTheme = extendTheme({
       },
     },
     colors: {},
-    components: {
-      Field,
-    },
+    components: {},
     fonts: {},
     textStyles: {},
   },

@@ -13,19 +13,24 @@ import { DateTime } from 'luxon';
 
 import TopDataDisplay from './TopDataDisplay';
 import BottomDataDisplay from './BottomDataDisplay';
+import ResetButton from './ResetButton';
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const initialTimes = {
+  start: '',
+  stop: '',
+  hourly: '',
+};
+
+const initialResult = {
+  timeWorked: [],
+  moneyMade: '',
+}
 
 const TimeForm = () => {
-  const [times, setTimes] = useState({
-    start: '',
-    stop: '',
-    hourly: '',
-  });
-  const [ result, setResult ] = useState({
-    timeWorked: [],
-    moneyMade: '',
-  });
+  const [times, setTimes] = useState(initialTimes);
+  const [ result, setResult ] = useState(initialResult);
 
   // let dateStr = DateTime.now().toLocaleString();
 
@@ -68,13 +73,15 @@ const TimeForm = () => {
     } else {
       final = { timeWorked: [ resultHours, resultMin ], moneyMade: handleHourly(resultHours, resultMin, hourly) };
     }
-    console.log('FINAL: ', final, 'RESULT_OBJ: ', resultObj)
+
     return final;
   }, []);
 
-  // React.useEffect(() => {
-  //   console.log('RESULT: ', result, 'TIMES: ', times, 'SHOW: ', show);
-  // }, [result, times, show]);
+  const handleReset = React.useCallback(() => {
+    setTimes(initialTimes);
+    setResult(initialResult);
+  }, []);
+
   return (
     <Box bg='#f8f8ff' p={6} rounded='lg'>
       {
@@ -163,18 +170,14 @@ const TimeForm = () => {
             disabled={isSubmitting}
             isFullWidth
           >
-            Ok, do it.
+            Do Math.
           </Button>
         </VStack>
         </form>
       )}
       </Formik>
       <BottomDataDisplay result={result} />
-      {
-        // result.moneyMade
-          // ? <BottomDataDisplay result={result} />
-          // : null
-      }
+      <ResetButton handleReset={handleReset} />
     </Box>
   );
 };

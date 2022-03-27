@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { ChakraProvider, CSSReset, Flex } from "@chakra-ui/react";
 
 import { customTheme } from "./styles/theme";

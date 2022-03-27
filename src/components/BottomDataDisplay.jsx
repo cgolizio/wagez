@@ -13,17 +13,13 @@ const BottomDataDisplay = ({ result }) => {
   }, []);
 
   const formatMoneyMade = React.useCallback(amount => {
-    let result, asNum, decimals;
-    asNum = amount.split('.')[0];
+    let result, decimals;
     amount = Math.abs(amount).toFixed(2);
-    console.log('amt: ++++++', Number(asNum) < 100)
       amount.length === 4
         ? result = `$${amount}0`
         : result = `$${amount}`;
     decimals = result.split('.')[1];
     return decimals === '00' ? result.split('.')[0] : result;
-    // console.log('INSIDE FORMATMONEYMADE: ', result.split('.')[1], result.substring(1, 4))
-    // return result;
   }, []);
 
   return (
@@ -48,9 +44,12 @@ const BottomDataDisplay = ({ result }) => {
                 You worked:
               </Heading>)
           }
-          <Heading color='#16161D' fontSize='8xl'>
-            {timeWorked && formatTimeWorked(timeWorked)}
-          </Heading>
+          {
+            timeWorked &&
+              (<Heading color='#16161D' fontSize='8xl'>
+                {formatTimeWorked(timeWorked)}
+              </Heading>)
+          }
 
           {
             moneyMade &&
@@ -58,9 +57,12 @@ const BottomDataDisplay = ({ result }) => {
                 You made:
               </Heading>)
           }
-          <Heading color='#16161D' fontSize='8xl'>
-            {moneyMade && formatMoneyMade(moneyMade)}
-          </Heading>
+          {
+            moneyMade &&
+              (<Heading color='#00AD07' fontSize='8xl'>
+                {formatMoneyMade(moneyMade)}
+              </Heading>)
+          }
 
         </VStack>
       </Flex>
