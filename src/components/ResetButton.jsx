@@ -1,20 +1,24 @@
+import React, { useContext } from 'react';
 import { Box, Button, Center } from "@chakra-ui/react"
 
-const ResetButton = ({ handleReset }) => {
+import { MainContext } from 'App';
+
+const ResetButton = () => {
+  const { handleReset } = useContext(MainContext);
   return (
     <Center>
-    <Box
-      pos='absolute'
-      bottom={75}
-    >
-      <Button
-        color='#16161D'
-        size='lg'
-        onClick={handleReset}
+      <Box
+        pos='absolute'
+        bottom={75}
       >
-        Reset
-      </Button>
-    </Box>
+        <Button
+          color='#16161D'
+          size='lg'
+          onClick={handleReset}
+        >
+          Reset
+        </Button>
+      </Box>
     </Center>
   )
 }
