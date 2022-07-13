@@ -27,13 +27,20 @@ export const formatTime = (time) => {
   if (hours > 12) {
     hours = hours - 12;
     dayOrNight = "PM";
+  } else if (hours === 12) {
+    dayOrNight = "PM";
   } else {
     dayOrNight = "AM";
   }
+
   if (minutes === 0) {
     minutes = "00";
   } else if (minutes.toString().length < 2) {
     minutes = `0${minutes}`;
+  }
+
+  if (hours === 0) {
+    hours = 12;
   }
   result = `${hours}:${minutes} ${dayOrNight}`;
   return result;
